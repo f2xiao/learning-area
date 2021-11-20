@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+`<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Conditionals: Task 3</title>
     <style>
       p {
@@ -17,37 +17,49 @@
   </head>
 
   <body>
-
-    <section class="preview">
-
-
-
-    </section>
-
+    <section class="preview"></section>
   </body>
   <script>
     let response;
     let score = 75;
     let machineActive = false;
 
-    if(machineActive) {
+    if (machineActive) {
       // Add your code here
+      switch (true) {
+        case score < 20:
+          response = "That was a terrible score — total fail!";
+          break;
+        case score < 40:
+          response =
+            "You know some things, but it's a pretty bad score. Needs improvement.";
+          break;
+        case score < 70:
+          response = "You did a passable job, not bad!";
+          break;
+        case score < 90:
+          response = "That's a great score, you really know your stuff.";
+          break;
+
+        default:
+          response = "What an amazing score! Did you cheat? Are you for real?";
+          break;
+      }
     } else {
-      response = 'The machine is turned off. Turn it on to process your score.';
+      response = "The machine is turned off. Turn it on to process your score.";
     }
 
     // Don't edit the code below here!
 
-    const section = document.querySelector('section');
+    const section = document.querySelector("section");
 
-    let para1 = document.createElement('p');
-    let para2 = document.createElement('p');
+    let para1 = document.createElement("p");
+    let para2 = document.createElement("p");
 
-    para1.textContent = `Your score is ${ score }.`;
+    para1.textContent = `Your score is ${score}.`;
     para2.textContent = response;
 
     section.appendChild(para1);
     section.appendChild(para2);
   </script>
-
 </html>
