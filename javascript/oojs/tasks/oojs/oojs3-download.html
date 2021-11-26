@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>OOJS: Task 3</title>
     <style>
       p {
@@ -17,16 +17,36 @@
   </head>
 
   <body>
-
-    <section class="preview">
-
-
-
-    </section>
-
+    <section class="preview"></section>
   </body>
   <script>
+    /* Finally, we'd like you to start with the ES `Shape` class you created in the last task.
 
+We'd like you to create a `Square` class that inherits from `Shape`, and adds a `calcArea()` method that calculates the square's area. Also set up the constructor so that the `name` property of `Square` object instances is automatically set to `square`, and the `sides` property is automatically set to `4`. When invoking the constructor, you should therefore just need to provide the `sideLength` property.
+
+Create an instance of the `Square` class called `square` with appropriate property values, and call its `calcPerimeter()` and `calcArea()` methods to show that it works OK. */
+
+    class Shape {
+      constructor(name, sides, sideLength) {
+        this.name = name;
+        this.sides = sides;
+        this.sideLength = sideLength;
+      }
+      calcPerimeter() {
+        console.log(`its perimeter is ${this.sides * this.sideLength}`);
+      }
+    }
+    class Square extends Shape {
+      constructor(sideLength) {
+        super("square", 4, sideLength);
+      }
+
+      calcArea() {
+        console.log(`its area is ${this.sideLength * this.sideLength}`);
+      }
+    }
+    const square = new Square(5);
+    square.calcArea();
+    square.calcPerimeter();
   </script>
-
 </html>

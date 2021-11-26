@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Object basics: Task 2</title>
     <style>
       p {
@@ -17,26 +17,42 @@
   </head>
 
   <body>
-
-    <section class="preview">
-
-
-
-    </section>
-
+    <section class="preview"></section>
   </body>
   <script>
+    /* In our next task, we want you to have a go at creating your own object literal to represent one of your favorite bands. The required properties are:
+
+    - `name`: A string representing the band name.
+    - `nationality`: A string representing the country the band comes from.
+    - `genre`: What type of music the band plays.
+    - `members`: A number representing the number of members the band has.
+    - `formed`: A number representing the year the band formed.
+    - `split`: A number representing the year the band split up, or `false` if they are still together.
+    - `albums`: An array representing the albums released by the band. Each array item should be an object containing the following members:
+
+      - `name`: A string representing the name of the album.
+      - `released`: A number representing the year the album was released. */
     let bandInfo;
 
     // Add your code here
-
+    bandInfo = {
+      name: "Arashi",
+      nationality: "Japan",
+      genre: "Pop",
+      members: 5,
+      formed: 1999,
+      split: false,
+      albums: [
+        { name: "Arashi", released: 1999 },
+        { name: "Amigo", released: 2001 },
+      ],
+    };
 
     // Don't edit the code below here!
 
-    const section = document.querySelector('section');
-    let para1 = document.createElement('p');
+    const section = document.querySelector("section");
+    let para1 = document.createElement("p");
     para1.textContent = bandInfo;
     section.appendChild(para1);
   </script>
-
 </html>
