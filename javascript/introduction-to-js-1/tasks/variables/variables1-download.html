@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Variables: Task 1</title>
     <style>
       p {
@@ -17,27 +17,29 @@
   </head>
 
   <body>
-
-    <section class="preview">
-
-
-
-    </section>
-
+    <section class="preview"></section>
   </body>
   <script>
+    /*  In this task we want you to:
+
+- Declare a variable called `myName`.
+- Initialize `myName` with a suitable value, on a separate line (you can use your actual name, or something else).
+- Declare a variable called `myAge` and initialize it with a value, on the same line. */
+
     // Add your code here
+    let myName;
+    myName = "Pixie";
+    let myAge = 8;
 
     // Don't edit the code below here!
 
-    const section = document.querySelector('section');
+    const section = document.querySelector("section");
 
-    let para1 = document.createElement('p');
+    let para1 = document.createElement("p");
     para1.textContent = myName;
-    let para2 = document.createElement('p');
+    let para2 = document.createElement("p");
     para2.textContent = myAge;
     section.appendChild(para1);
     section.appendChild(para2);
   </script>
-
 </html>

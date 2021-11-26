@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Conditionals: Task 1</title>
     <style>
       p {
@@ -17,26 +17,31 @@
   </head>
 
   <body>
-
     <section class="preview"></section>
-
   </body>
-  
-  
+
   <script>
-    let season = 'summer';
+    /* In this task you are provided with two variables:
+
+    - `season` — contains a string that says what the current season is.
+    - `response` — begins uninitialized, but is later used to store a response that will be printed to the output panel.
+
+    We want you to create a conditional that checks whether `season` contains the string "summer", and if so assigns a string to `response` that gives the user an appropriate message about the season. If not, it should assign a generic string to `response` that tells the user we don't know what season it is.
+
+    To finish off, you should then add another test that checks whether `season` contains the string "winter", and again assigns an appropriate string to `response`. */
+    let season = "summer";
     let response;
 
     // Add your code here
+    if (season.includes("summer")) response = `It's summer`;
+    else response = "we don't know what season it is";
 
     // Don't edit the code below here!
 
-    const section = document.querySelector('section');
+    const section = document.querySelector("section");
 
-    let para1 = document.createElement('p');
+    let para1 = document.createElement("p");
     para1.textContent = response;
     section.appendChild(para1);
-    
   </script>
-
 </html>
