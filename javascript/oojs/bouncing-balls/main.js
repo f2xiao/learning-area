@@ -34,6 +34,55 @@ class Ball extends Shape {
     this.color = color;
     this.size = size;
   }
+
+  // create a prototype update method to update the data
+  update() {
+    // left edge
+    if (this.x <= this.size) {
+      this.velX = -this.velX;
+    }
+    // top edge
+    if (this.y <= this.size) {
+      this.velY = -this.velY;
+    }
+
+    // right edge
+    if (this.x + this.size >= width) {
+      this.velX = -this.velX;
+    }
+    // bottom edge
+    if (this.y + this.size >= height) {
+      this.velY = -this.velY;
+    }
+
+    this.x += this.velX;
+    this.y += this.velY;
+  }
+
+  // create a prototype draw method to draw the ball onto the screen
+  draw() {
+    ctx.beginPath();
+    ctx.fillStyle = this.color;
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+
+  // create a prototype collision dectection method
+  collisionDectect() {
+    for (let i = 0; i < balls.length; i++) {
+      if (this.exists && !(this === balls[i])) {
+        const dx = this.x - balls[i].x;
+        const dy = this.y - balls[i].y;
+        const distance = Math.sqrt(dx ** 2 + dy ** 2);
+        if (this.size + balls[i].size > distance) {
+          balls[i].color = this.color = `rgb(${random(0, 255)},${random(
+            0,
+            255
+          )},${random(0, 255)})`;
+        }
+      }
+    }
+  }
 }
 class EvilCircle extends Shape {
   constructor(x, y, velX, velY, exists, color, size) {
@@ -41,112 +90,65 @@ class EvilCircle extends Shape {
     this.color = color;
     this.size = size;
   }
+  checkBounds() {
+    // left edge
+    if (this.x <= this.size) {
+      this.x += this.size;
+    }
+    // top edge
+    if (this.y <= this.size) {
+      this.y += this.size;
+    }
+
+    // right edge
+    if (this.x + this.size >= width) {
+      this.x -= this.size;
+    }
+    // bottom edge
+    if (this.y + this.size >= height) {
+      this.y -= this.size;
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.strokeStyle = this.color;
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    ctx.stroke();
+  }
+
+  setControls() {
+    let _this = this;
+    window.onkeydown = function (e) {
+      if (e.key === "a") {
+        _this.x -= _this.velX;
+      }
+      if (e.key === "w") {
+        _this.y -= _this.velY;
+      }
+      if (e.key === "s") {
+        _this.y += _this.velY;
+      }
+      if (e.key === "d") {
+        _this.x += _this.velX;
+      }
+    };
+  }
+
+  collisionDectect() {
+    for (let i = 0; i < balls.length; i++) {
+      if (balls[i].exists) {
+        const dx = this.x - balls[i].x;
+        const dy = this.y - balls[i].y;
+        const distance = Math.sqrt(dx ** 2 + dy ** 2);
+        if (this.size + balls[i].size > distance) {
+          balls[i].exists = false;
+          score++;
+          displayScore(score);
+        }
+      }
+    }
+  }
 }
-
-// create a prototype update method to update the data
-Ball.prototype.update = function () {
-  // left edge
-  if (this.x <= this.size) {
-    this.velX = -this.velX;
-  }
-  // top edge
-  if (this.y <= this.size) {
-    this.velY = -this.velY;
-  }
-
-  // right edge
-  if (this.x + this.size >= width) {
-    this.velX = -this.velX;
-  }
-  // bottom edge
-  if (this.y + this.size >= height) {
-    this.velY = -this.velY;
-  }
-
-  this.x += this.velX;
-  this.y += this.velY;
-};
-EvilCircle.prototype.checkBounds = function () {
-  // left edge
-  if (this.x <= this.size) {
-    this.x += this.size;
-  }
-  // top edge
-  if (this.y <= this.size) {
-    this.y += this.size;
-  }
-
-  // right edge
-  if (this.x + this.size >= width) {
-    this.x -= this.size;
-  }
-  // bottom edge
-  if (this.y + this.size >= height) {
-    this.y -= this.size;
-  }
-};
-
-// create a prototype draw method to draw the ball onto the screen
-Ball.prototype.draw = function () {
-  ctx.beginPath();
-  ctx.fillStyle = this.color;
-  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-  ctx.fill();
-};
-EvilCircle.prototype.draw = function () {
-  ctx.beginPath();
-  ctx.strokeStyle = this.color;
-  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-  ctx.stroke();
-};
-EvilCircle.prototype.setControls = function () {
-  let _this = this;
-  window.onkeydown = function (e) {
-    if (e.key === "a") {
-      _this.x -= _this.velX;
-    }
-    if (e.key === "w") {
-      _this.y -= _this.velY;
-    }
-    if (e.key === "s") {
-      _this.y += _this.velY;
-    }
-    if (e.key === "d") {
-      _this.x += _this.velX;
-    }
-  };
-};
-
-// create a prototype collision dectection method
-Ball.prototype.collisionDectect = function () {
-  for (let i = 0; i < balls.length; i++) {
-    if (this.exists && !(this === balls[i])) {
-      const dx = this.x - balls[i].x;
-      const dy = this.y - balls[i].y;
-      const distance = Math.sqrt(dx ** 2 + dy ** 2);
-      if (this.size + balls[i].size > distance) {
-        balls[i].color = this.color = `rgb(${random(0, 255)},${random(
-          0,
-          255
-        )},${random(0, 255)})`;
-      }
-    }
-  }
-};
-EvilCircle.prototype.collisionDectect = function () {
-  for (let i = 0; i < balls.length; i++) {
-    if (balls[i].exists) {
-      const dx = this.x - balls[i].x;
-      const dy = this.y - balls[i].y;
-      const distance = Math.sqrt(dx ** 2 + dy ** 2);
-      if (this.size + balls[i].size > distance) {
-        balls[i].exists = false;
-        score++;
-        displayScore(score);
-      }
-    }
-  }
-};
 
 // create a loop function to animate the balls
 function loop() {
