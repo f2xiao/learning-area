@@ -112,6 +112,7 @@ class EvilCircle extends Shape {
   draw() {
     ctx.beginPath();
     ctx.strokeStyle = this.color;
+    ctx.lineWidth = 3;
     ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
     ctx.stroke();
   }
@@ -142,8 +143,8 @@ class EvilCircle extends Shape {
         const distance = Math.sqrt(dx ** 2 + dy ** 2);
         if (this.size + balls[i].size > distance) {
           balls[i].exists = false;
-          score++;
-          displayScore(score);
+          count--;
+          displayScore(count);
         }
       }
     }
@@ -157,7 +158,6 @@ function loop() {
   for (let i = 0; i < balls.length; i++) {
     if (balls[i].exists) {
       balls[i].draw();
-      console.log(score);
       balls[i].update();
       balls[i].collisionDectect();
     }
@@ -169,7 +169,7 @@ function loop() {
 }
 
 function displayScore(score) {
-  counter.textContent = score;
+  counter.textContent = `Ball count: ${score}`;
 }
 
 // create an array with 25 randomly generate ball objects
@@ -188,8 +188,16 @@ while (balls.length < 25) {
   balls.push(ball);
 }
 const counter = document.querySelector("p");
-let score = 0;
-displayScore(score);
-const evilCircle = new EvilCircle(10, 10, 20, 20, true, "white", 10);
+let count = 25;
+displayScore(count);
+const evilCircle = new EvilCircle(
+  width / 2,
+  height / 2,
+  20,
+  20,
+  true,
+  "white",
+  10
+);
 evilCircle.setControls();
 loop();
